@@ -397,14 +397,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-03-13
+                    2023-03-15
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    656
+                    660
                 </div>
                 
 
@@ -448,86 +448,86 @@
 <p>​	1.Nginx反向代理解决跨域问题</p>
 <p>​	2.使用使用@CrossOrigin注解，在需要跨域访问的类和方法中设置允许跨域访问(标注在controller		类的方法上或者controller类上)</p>
 <p>​	<strong>在controller使用</strong></p>
-<pre><code>@CrossOrigin
-@RestController
-@RequestMapping(&quot;/user&quot;)
-public class UserController &#123;
+<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@CrossOrigin</span>
+<span class="token annotation punctuation">@RestController</span>
+<span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">"/user"</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">UserController</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
 
-@GetMapping(&quot;/&#123;id&#125;&quot;)
-public User get(@PathVariable Long id) &#123;
+<span class="token annotation punctuation">@GetMapping</span><span class="token punctuation">(</span><span class="token string">"/&amp;#123;id&amp;#125;"</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> User <span class="token function">get</span><span class="token punctuation">(</span><span class="token annotation punctuation">@PathVariable</span> Long id<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
     
-&#125;
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 
-@DeleteMapping(&quot;/&#123;id&#125;&quot;)
-public void remove(@PathVariable Long id) &#123;
+<span class="token annotation punctuation">@DeleteMapping</span><span class="token punctuation">(</span><span class="token string">"/&amp;#123;id&amp;#125;"</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">remove</span><span class="token punctuation">(</span><span class="token annotation punctuation">@PathVariable</span> Long id<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
 
-    &#125;
-&#125;
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 </code></pre>
 <p>​	<strong>在具体接口上使用</strong></p>
-<pre><code>@RestController
-@RequestMapping(&quot;/user&quot;)
-public class UserController &#123;
+<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@RestController</span>
+<span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">"/user"</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">UserController</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
 
-    @CrossOrigin
-    @GetMapping(&quot;/&#123;id&#125;&quot;)
-    public User get(@PathVariable Long id) &#123;
+    <span class="token annotation punctuation">@CrossOrigin</span>
+    <span class="token annotation punctuation">@GetMapping</span><span class="token punctuation">(</span><span class="token string">"/&amp;#123;id&amp;#125;"</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> User <span class="token function">get</span><span class="token punctuation">(</span><span class="token annotation punctuation">@PathVariable</span> Long id<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
         
-    &#125;
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 
-    @DeleteMapping(&quot;/&#123;id&#125;&quot;)
-    public void remove(@PathVariable Long id) &#123;
+    <span class="token annotation punctuation">@DeleteMapping</span><span class="token punctuation">(</span><span class="token string">"/&amp;#123;id&amp;#125;"</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">remove</span><span class="token punctuation">(</span><span class="token annotation punctuation">@PathVariable</span> Long id<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
 
-    &#125;
-&#125;
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 </code></pre>
 <p>​	3.继承使用Spring Web的CorsFilter（适用于Spring MVC、Spring Boot）</p>
 <p>​	</p>
-<pre><code>import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
+<pre class=" language-java"><code class="language-java"><span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>Bean<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>Configuration<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>cors<span class="token punctuation">.</span>CorsConfiguration<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>cors<span class="token punctuation">.</span>UrlBasedCorsConfigurationSource<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>filter<span class="token punctuation">.</span>CorsFilter<span class="token punctuation">;</span>
 
-import java.util.Collections;
-import java.util.List;
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>Collections<span class="token punctuation">;</span>
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>List<span class="token punctuation">;</span>
 
-@Configuration
-public class CorsConfig &#123;
-    @Bean
-    public CorsFilter corsFilter() &#123;
-        CorsConfiguration corsConfiguration = new CorsConfiguration();
-        //1,允许任何来源，这里可以线上填写具体允许的域名
-        corsConfiguration.setAllowedOriginPatterns(Collections. singletonList(&quot;*&quot;));
-        //2,允许任何请求头
-        corsConfiguration.addAllowedHeader(CorsConfiguration.ALL);
-        //3,允许任何方法
-        corsConfiguration.addAllowedMethod(CorsConfiguration.ALL);
-        //4,允许凭证
-        corsConfiguration.setAllowCredentials(true);
+<span class="token annotation punctuation">@Configuration</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CorsConfig</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token keyword">public</span> CorsFilter <span class="token function">corsFilter</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        CorsConfiguration corsConfiguration <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CorsConfiguration</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//1,允许任何来源，这里可以线上填写具体允许的域名</span>
+        corsConfiguration<span class="token punctuation">.</span><span class="token function">setAllowedOriginPatterns</span><span class="token punctuation">(</span>Collections<span class="token punctuation">.</span> <span class="token function">singletonList</span><span class="token punctuation">(</span><span class="token string">"*"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//2,允许任何请求头</span>
+        corsConfiguration<span class="token punctuation">.</span><span class="token function">addAllowedHeader</span><span class="token punctuation">(</span>CorsConfiguration<span class="token punctuation">.</span>ALL<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//3,允许任何方法</span>
+        corsConfiguration<span class="token punctuation">.</span><span class="token function">addAllowedMethod</span><span class="token punctuation">(</span>CorsConfiguration<span class="token punctuation">.</span>ALL<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//4,允许凭证</span>
+        corsConfiguration<span class="token punctuation">.</span><span class="token function">setAllowCredentials</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        UrlBasedCorsConfigurationSource source = new  	  UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration(&quot;/**&quot;, corsConfiguration);
-        return new CorsFilter(source);
-    &#125;
-&#125;
+        UrlBasedCorsConfigurationSource source <span class="token operator">=</span> <span class="token keyword">new</span>  	  <span class="token class-name">UrlBasedCorsConfigurationSource</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        source<span class="token punctuation">.</span><span class="token function">registerCorsConfiguration</span><span class="token punctuation">(</span><span class="token string">"/**"</span><span class="token punctuation">,</span> corsConfiguration<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">CorsFilter</span><span class="token punctuation">(</span>source<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 </code></pre>
 <p>​	4.实现WebMvcConfigurer接口（适用于Spring Boot）</p>
-<pre><code>//标注这个类是一个配置类
-@Configuration
-//实现 WebMvcConfigurer 接口
-public class CorsConfig implements WebMvcConfigurer &#123;
-    @Override
-    public void addCorsMappings(CorsRegistry registry) &#123;
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//标注这个类是一个配置类</span>
+<span class="token annotation punctuation">@Configuration</span>
+<span class="token comment" spellcheck="true">//实现 WebMvcConfigurer 接口</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CorsConfig</span> <span class="token keyword">implements</span> <span class="token class-name">WebMvcConfigurer</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">addCorsMappings</span><span class="token punctuation">(</span>CorsRegistry registry<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
  
-        registry.addMapping(&quot;/**&quot;)  //设置允许跨域访问的路径
-                .allowedOriginPatterns(&quot;*&quot;)  //设置允许跨域访问的源
-                .allowedMethods(&quot;*&quot;)  //允许跨域请求的方法
-                .maxAge(168000)  //预检间隔时间
-                .allowedHeaders(&quot;*&quot;)  //允许头部设置
-                .allowCredentials(true);  //是否发送 cookie
-    &#125;
-&#125;
+        registry<span class="token punctuation">.</span><span class="token function">addMapping</span><span class="token punctuation">(</span><span class="token string">"/**"</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">//设置允许跨域访问的路径</span>
+                <span class="token punctuation">.</span><span class="token function">allowedOriginPatterns</span><span class="token punctuation">(</span><span class="token string">"*"</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">//设置允许跨域访问的源</span>
+                <span class="token punctuation">.</span><span class="token function">allowedMethods</span><span class="token punctuation">(</span><span class="token string">"*"</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">//允许跨域请求的方法</span>
+                <span class="token punctuation">.</span><span class="token function">maxAge</span><span class="token punctuation">(</span><span class="token number">168000</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">//预检间隔时间</span>
+                <span class="token punctuation">.</span><span class="token function">allowedHeaders</span><span class="token punctuation">(</span><span class="token string">"*"</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">//允许头部设置</span>
+                <span class="token punctuation">.</span><span class="token function">allowCredentials</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//是否发送 cookie</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 </code></pre>
 
                 
@@ -673,18 +673,17 @@ public class CorsConfig implements WebMvcConfigurer &#123;
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/03/13/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">
+                <a href="/2023/03/15/%E9%9D%A2%E8%AF%95/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="跨域问题">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="面试八股--spring">
                         
-                        <span class="card-title">跨域问题</span>
+                        <span class="card-title">面试八股--spring</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -694,27 +693,30 @@ public class CorsConfig implements WebMvcConfigurer &#123;
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-13
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-03-15
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Java/" class="post-category">
-                                    Java
+                            <a href="/categories/%E9%9D%A2%E8%AF%95/" class="post-category">
+                                    面试
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E8%B7%A8%E5%9F%9F/">
-                        <span class="chip bg-color">跨域</span>
+                    <a href="/tags/%E9%9D%A2%E8%AF%95/">
+                        <span class="chip bg-color">面试</span>
+                    </a>
+                    
+                    <a href="/tags/spring/">
+                        <span class="chip bg-color">spring</span>
                     </a>
                     
                 </div>
