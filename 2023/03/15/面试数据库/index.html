@@ -366,12 +366,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">
-                                <span class="chip bg-color">数据库</span>
-                            </a>
-                        
                             <a href="/tags/%E9%9D%A2%E8%AF%95/">
                                 <span class="chip bg-color">面试</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                                <span class="chip bg-color">数据库</span>
                             </a>
                         
                     </div>
@@ -402,21 +402,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-03-15
+                    2023-03-16
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    4.6k
+                    5.8k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    15 分
+                    20 分
                 </div>
                 
 
@@ -472,6 +472,28 @@
 <p>​	需要经常增删改。需要评估是否适合加索引</p>
 <p>​	参与列计算的列不适合建索引</p>
 <p>​	区分度不高的字段不适合建立索引，如性别，只有男&#x2F;女&#x2F;未知三个值。加了索引，查询效率也不会提高</p>
+<p><strong>mysql 有4种不同的索引：</strong></p>
+<p>​	主键索引（PRIMARY）：数据列不允许重复，不允许为NULL，一个表只能有一个主键。</p>
+<p>​	唯一索引（UNIQUE）：数据列不允许重复，允许为NULL值，一个表允许多个列创建唯一索引。</p>
+<p>​	普通索引（INDEX）</p>
+<p>​	全文索引（FULLTEXT）</p>
+<p><strong>常见索引原则有</strong></p>
+<p>​	1 最左前缀匹配原则：以最左边为起点的任何连续的索引都能匹配上。同时，遇到范围查询就会停止匹配</p>
+<p>​	2 为常用作为查询条件的字段建立索引</p>
+<p>​	3 更新频繁的字段不适合创建索引</p>
+<p>​	4 为经常需要排序、分组和联合操作的字段建立索引。</p>
+<p>​	5 尽量的扩展索引，不要新建索引</p>
+<p>​	6 区分度较低的列不适合创建索引</p>
+<p><strong>B+树和B树的区别，以及为什么不使用B树，Hash索引？</strong></p>
+<p>​	B树也称B-树，多路平衡查找树</p>
+<p>​	B 树的所有节点既存放键(key) 也存放 数据(data)，而 B+树只有叶子节点存放 key 和 data，其他内节点只存放 key。</p>
+<p>​	B 树的叶子节点都是独立的。B+树的叶子节点有一条引用链指向与它相邻的叶子节点</p>
+<p>​	B 树的检索的过程相当于对范围内的每个节点的关键字做二分查找，可能还没有到达叶子节点，检索就结束了。而 B+树的检索效率就很稳定了，任何查找都是从根节点到叶子节点的过程，叶子节点的顺序检索很明显。</p>
+<p>​	MySQL没有使用Hash表作为索引结构是因为：Hash 索引不支持顺序和范围查询不使用B树的原因：</p>
+<p>​		B+树的检索效率就很稳定<br>​		B 树不管叶子节点还是非叶子节点，都会保存数据，所以每个结点能保存的索引值就很少，如果数据很大，只能增加树的高度，这样会降低性能。</p>
+<p><strong>索引的底层实现原理和优化</strong></p>
+<p>​		B+树，经过优化的 B+树</p>
+<p>​		主要是在所有的叶子结点中增加了指向下一个叶子节点的指针，因此 InnoDB 建议为大部分表使用默认自增的主键作为主索引。</p>
 <p><strong>SQL优化</strong></p>
 <p>​	1.查询语句尽量不要使用select*</p>
 <p>​	2.尽量减少子查询，使用关联查询（inner join，left join，right join）来代替</p>
@@ -524,6 +546,27 @@
 <p>外连接 其结果集中不仅包含符合连接条件的行，而且还会包括左表、右表或两个表中的所有数据行，这三种情况依次称之为左外连接，右外连接，和全外连接。</p>
 <p>左外连接，也称左连接，左表为主表，左表中的所有记录都会出现在结果集中，对于那些在右表中并没有匹配的记录，仍然要显示，右边对</p>
 <p>应的那些字段值以NULL 来填充。右外连接，也称右连接，右表为主表，右表中的所有记录都会出现在结果集中。左连接和右连接可以互换，MySQL 目前还不支持全外连接。</p>
+<p><strong>数据库引擎有哪些</strong></p>
+<p>​	 	<strong>MYISAM</strong>：全表锁，拥有较高的执行速度，不支持事务，不支持外键，并发性能差，占用空间相对较小，对事务完整性没有要求，以select、insert为主的应用基本上可以使用这引擎</p>
+<p>​		<strong>Innodb</strong>:行级锁，提供了具有提交、回滚和崩溃回复能力的事务安全，支持自动增长列，支持外键约束，并发能力强，占用空间是MYISAM的2.5倍，处理效率相对会差一些</p>
+<p>​		<strong>Memory</strong>:全表锁，存储在内容中，速度快，但会占用和数据量成正比的内存空间且数据在mysql重启时会丢失，默认使用HASH索引，检索效率非常高，但不适用于精确查找，主要用于那些内容变化不频繁的代码表</p>
+<p>​		<strong>merge</strong>:是一组MYISAM表的组合</p>
+<p><strong>Innodb和MYISAM的区别</strong>？</p>
+<p>​	1. InnoDB支持事务，MyISAM不支持，对于InnoDB每一条SQL语言都默认封装成事务，自动提交，这样会影响速度，所以最好把多条SQL语言放在begin和commit之间，组成一个事务；</p>
+<ol start="2">
+<li><p>InnoDB支持外键，而MyISAM不支持。对一个包含外键的InnoDB表转为MYISAM会失败；</p>
+</li>
+<li><p>InnoDB是聚集索引，数据文件是和索引绑在一起的，必须要有主键，通过主键索引效率很高。但是辅助索引需要两次查询，先查询到主键，然后再通过主键查询到数据。因此，主键不应该过大，因为主键太大，其他索引也都会很大。而MyISAM是非聚集索引，数据文件是分离的，索引保存的是数据文件的指针。主键索引和辅助索引是独立的。</p>
+</li>
+<li><p>InnoDB不保存表的具体行数，执行select count(*) from table时需要全表扫描。而MyISAM用一个变量保存了整个表的行数，执行上述语句时只需要读出该变量即可，速度很快；</p>
+</li>
+<li><p>Innodb不支持全文索引，而MyISAM支持全文索引，查询效率上MyISAM要高；</p>
+</li>
+</ol>
+<p><strong>如何选择引擎？</strong></p>
+<p>​	如果没有特别的需求，使用默认的 Innodb 即可。</p>
+<p>​	MyISAM：以读写插入为主的应用程序，比如博客系统、新闻门户网站。</p>
+<p>​	Innodb：更新（删除）操作频率也高，或者要保证数据的完整性；并发量高，支持事务和外键。比如OA自动化办公系统。</p>
 <p><strong>Redis</strong> <strong>与其他</strong> <strong>key - value</strong> <strong>缓存产品有以下三个特点：</strong></p>
 <p>​	Redis 支持数据的持久化，可以将内存中的数据保存在磁盘中，重启的时候可以再次加载进行使用。</p>
 <p>​	Redis 不仅仅支持简单的 key-value 类型的数据，还提供 list，set，zset，hash 等数据结构的存储。</p>
@@ -652,12 +695,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">
-                                    <span class="chip bg-color">数据库</span>
-                                </a>
-                            
                                 <a href="/tags/%E9%9D%A2%E8%AF%95/">
                                     <span class="chip bg-color">面试</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                                    <span class="chip bg-color">数据库</span>
                                 </a>
                             
                         </div>
@@ -736,18 +779,17 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/03/15/%E9%9D%A2%E8%AF%95%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                <a href="/2023/03/16/%E9%9D%A2%E8%AF%95Java%E5%9F%BA%E7%A1%80/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="面试八股--数据库">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="面试八股--Java基础">
                         
-                        <span class="card-title">面试八股--数据库</span>
+                        <span class="card-title">面试八股--Java基础</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -757,9 +799,9 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-15
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-03-16
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -772,16 +814,15 @@
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">
-                        <span class="chip bg-color">数据库</span>
-                    </a>
-                    
                     <a href="/tags/%E9%9D%A2%E8%AF%95/">
                         <span class="chip bg-color">面试</span>
+                    </a>
+                    
+                    <a href="/tags/Java%E5%9F%BA%E7%A1%80/">
+                        <span class="chip bg-color">Java基础</span>
                     </a>
                     
                 </div>

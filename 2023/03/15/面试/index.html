@@ -400,7 +400,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-03-15
+                    2023-03-16
                 </div>
                 
 
@@ -536,24 +536,24 @@
 <p>​	1.properties文件     2.YAML文件    3.系统环境变量   4.命令行参数</p>
 <p><strong>mybatis中，当实体类中的属性名和表中的字段名不一致时怎么办</strong>？</p>
 <p>​	1.通过在查询的SQL语句中定义字段名的别名，让字段名的别名和实体类的属性名一致。</p>
-<pre class=" language-sql"><code class="language-sql"><span class="token operator">&lt;</span><span class="token keyword">select</span> id<span class="token operator">=</span>”selectorder” parametertype<span class="token operator">=</span>”<span class="token keyword">int</span>”
-resultetype<span class="token operator">=</span>”me<span class="token punctuation">.</span>gacl<span class="token punctuation">.</span>domain<span class="token punctuation">.</span><span class="token keyword">order</span>”<span class="token operator">></span>
-        <span class="token keyword">select</span> order_id id<span class="token punctuation">,</span> order_no orderno <span class="token punctuation">,</span>order_price price form orders <span class="token keyword">where</span>
-order_id<span class="token operator">=</span><span class="token comment" spellcheck="true">#&amp;#123;id&amp;#125;;</span>
-<span class="token operator">&lt;</span><span class="token operator">/</span><span class="token keyword">select</span><span class="token operator">></span>
+<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>select</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span>”selectorder”</span> <span class="token attr-name">parametertype</span><span class="token attr-value"><span class="token punctuation">=</span>”int”</span>
+<span class="token attr-name">resultetype</span><span class="token attr-value"><span class="token punctuation">=</span>”me.gacl.domain.order”</span><span class="token punctuation">></span></span>
+        select order_id id, order_no orderno ,order_price price form orders where
+order_id=#<span class="token entity" title="&#123;">&amp;#123;</span>id<span class="token entity" title="&#125;">&amp;#125;</span>;
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>select</span><span class="token punctuation">></span></span>
 </code></pre>
 <p>​	2.通过映射字段名和实体类属性名的一一对应关系</p>
-<pre class=" language-sql"><code class="language-sql"><span class="token operator">&lt;</span><span class="token keyword">select</span> id<span class="token operator">=</span><span class="token string">"getOrder"</span> parameterType<span class="token operator">=</span><span class="token string">"int"</span> resultMap<span class="token operator">=</span><span class="token string">"orderresultmap"</span><span class="token operator">></span>
-        <span class="token keyword">select</span> <span class="token operator">*</span> <span class="token keyword">from</span> orders <span class="token keyword">where</span> order_id<span class="token operator">=</span><span class="token comment" spellcheck="true">#&amp;#123;id&amp;#125;</span>
-    <span class="token operator">&lt;</span><span class="token operator">/</span><span class="token keyword">select</span><span class="token operator">></span>
-    <span class="token operator">&lt;</span>resultMap <span class="token keyword">type</span><span class="token operator">=</span>”me<span class="token punctuation">.</span>gacl<span class="token punctuation">.</span>domain<span class="token punctuation">.</span><span class="token keyword">order</span>” id<span class="token operator">=</span>”orderresultmap”<span class="token operator">></span>
-        <span class="token operator">&lt;</span><span class="token operator">!</span>–用id属性来映射主键字段–<span class="token operator">></span>
-        <span class="token operator">&lt;</span>id property<span class="token operator">=</span>”id” <span class="token keyword">column</span><span class="token operator">=</span>”order_id”<span class="token operator">></span>
+<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>select</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>getOrder<span class="token punctuation">"</span></span> <span class="token attr-name">parameterType</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>int<span class="token punctuation">"</span></span> <span class="token attr-name">resultMap</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>orderresultmap<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        select * from orders where order_id=#<span class="token entity" title="&#123;">&amp;#123;</span>id<span class="token entity" title="&#125;">&amp;#125;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>select</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>resultMap</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span>”me.gacl.domain.order”</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span>”orderresultmap”</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>!–用id属性来映射主键字段–</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>id</span> <span class="token attr-name">property</span><span class="token attr-value"><span class="token punctuation">=</span>”id”</span> <span class="token attr-name">column</span><span class="token attr-value"><span class="token punctuation">=</span>”order_id”</span><span class="token punctuation">></span></span>
         
-        <span class="token operator">&lt;</span><span class="token operator">!</span>–用result属性来映射非主键字段，property为实体类属性名，<span class="token keyword">column</span>为数据表中的属性–<span class="token operator">></span>
-        <span class="token operator">&lt;</span>result property <span class="token operator">=</span> “orderno” <span class="token keyword">column</span> <span class="token operator">=</span>”order_no”<span class="token operator">/</span><span class="token operator">></span>
-        <span class="token operator">&lt;</span>result property<span class="token operator">=</span>”price” <span class="token keyword">column</span><span class="token operator">=</span>”order_price” <span class="token operator">/</span><span class="token operator">></span>
-<span class="token operator">&lt;</span><span class="token operator">/</span>reslutMap<span class="token operator">></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>!–用result属性来映射非主键字段，property为实体类属性名，column为数据表中的属性–</span><span class="token punctuation">></span></span>
+        &lt;result property = “orderno” column =”order_no”/>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>result</span> <span class="token attr-name">property</span><span class="token attr-value"><span class="token punctuation">=</span>”price”</span> <span class="token attr-name">column</span><span class="token attr-value"><span class="token punctuation">=</span>”order_price”</span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>reslutMap</span><span class="token punctuation">></span></span>
 </code></pre>
 <p>在mybatisPlus中还可以使用：</p>
 <p>​	@TableName(value &#x3D; …) 当数据库名和实体类名不一致时或者是不符合驼峰命名时，需要此注解指定表名</p>
@@ -577,9 +577,9 @@ order_id<span class="token operator">=</span><span class="token comment" spellch
 <p><strong>mybatis实现分页功能：</strong></p>
 <p>​	1.全部结果查询出来，在进行分页，但是效率不高</p>
 <p>​	2.通过SQL语句实现，查询时在SQL语句后面添加<strong>limit</strong>分页语句</p>
-<pre class=" language-sql"><code class="language-sql"><span class="token operator">&lt;</span><span class="token keyword">select</span> id<span class="token operator">=</span><span class="token string">"queryStuentBySql"</span> parameterType<span class="token operator">=</span><span class="token string">"map"</span> resultMap<span class="token operator">=</span><span class="token string">"Student"</span><span class="token operator">></span>
-    <span class="token keyword">select</span> <span class="token operator">*</span> <span class="token keyword">from</span> student <span class="token keyword">limit</span> <span class="token comment" spellcheck="true">#&amp;#123;index&amp;#125; , #&amp;#123;pagesize&amp;#125; //index 要开始查询的第一条记录的索引</span>
-<span class="token operator">&lt;</span><span class="token operator">/</span><span class="token keyword">select</span><span class="token operator">></span>											   <span class="token comment" spellcheck="true">//pagesize 要查询的记录数</span>
+<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>select</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>queryStuentBySql<span class="token punctuation">"</span></span> <span class="token attr-name">parameterType</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>map<span class="token punctuation">"</span></span> <span class="token attr-name">resultMap</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Student<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    select * from student limit #<span class="token entity" title="&#123;">&amp;#123;</span>index<span class="token entity" title="&#125;">&amp;#125;</span> , #<span class="token entity" title="&#123;">&amp;#123;</span>pagesize<span class="token entity" title="&#125;">&amp;#125;</span> //index 要开始查询的第一条记录的索引
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>select</span><span class="token punctuation">></span></span>											   //pagesize 要查询的记录数
 </code></pre>
 <p>​	3.用RowBounds分页，创建RowBounds对象，使用有参传开始的条数（（page -1）*pagesize）和每页几条数据(pagesize)，调用mapper方法讲RowBounds对象传递进去 （不推荐）</p>
 <p>​	4.使用pageHelper插件分页、主要是通过mybatis拦截器实现的</p>
@@ -828,12 +828,12 @@ order_id<span class="token operator">=</span><span class="token comment" spellch
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">
-                        <span class="chip bg-color">数据库</span>
-                    </a>
-                    
                     <a href="/tags/%E9%9D%A2%E8%AF%95/">
                         <span class="chip bg-color">面试</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                        <span class="chip bg-color">数据库</span>
                     </a>
                     
                 </div>
