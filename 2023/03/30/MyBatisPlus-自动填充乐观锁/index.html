@@ -441,7 +441,7 @@
 <p>​	项目中经常会遇到一些数据，每次都使用相同的方式填充，例如记录的创建时间，更新时间等。</p>
 <p>我们可以使用MyBatis Plus的自动填充功能，完成这些字段的赋值工作</p>
 <h2 id="1-数据修改"><a href="#1-数据修改" class="headerlink" title="1.数据修改"></a>1.数据修改</h2><p>​	在User表中添加datetime类型的新的字段 create_time、update_time</p>
-<p><img src="/image%5Cimage-20230330172116839.png" alt="image-20230330172116839"></p>
+<p><img src="/2023/03/30/MyBatisPlus-%E8%87%AA%E5%8A%A8%E5%A1%AB%E5%85%85%E4%B9%90%E8%A7%82%E9%94%81/image-20230330172116839.png"></p>
 <h2 id="2-实体类修改"><a href="#2-实体类修改" class="headerlink" title="2.实体类修改"></a>2.实体类修改</h2><p>​	实体上增加字段并添加自动填充注解</p>
 <pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@TableField</span><span class="token punctuation">(</span>fill <span class="token operator">=</span> FieldFill<span class="token punctuation">.</span>INSERT<span class="token punctuation">)</span>	<span class="token comment" spellcheck="true">//添加的时候设置值</span>
 <span class="token keyword">private</span> Date createTime<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//create_time</span>
@@ -493,7 +493,7 @@
 <p>​	3.跟新成功后，数据库的version版本自动更新</p>
 <p>​	接下来介绍如何在Mybatis-Plus项目中，使用乐观锁：</p>
 <h2 id="1-修改数据表"><a href="#1-修改数据表" class="headerlink" title="1.修改数据表"></a>1.修改数据表</h2><p>​	在表中添加字段作为版本号</p>
-<p><img src="/image%5Cimage-20230330175430488.png" alt="image-20230330175430488"></p>
+<p><img src="/2023/03/30/MyBatisPlus-%E8%87%AA%E5%8A%A8%E5%A1%AB%E5%85%85%E4%B9%90%E8%A7%82%E9%94%81/image-20230330175430488.png"></p>
 <h2 id="2-修改实体类"><a href="#2-修改实体类" class="headerlink" title="2.修改实体类"></a>2.修改实体类</h2><p>​	在表对应实体类中添加版本号属性,并在版本号属性上添加@Version注解</p>
 <pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Version</span>
 <span class="token keyword">private</span> Integer version<span class="token punctuation">;</span>
@@ -687,36 +687,58 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2023/03/30/fei/">
+                <a href="/2023/03/30/MyBatisPlus-%E8%87%AA%E5%8A%A8%E5%A1%AB%E5%85%85%E4%B9%90%E8%A7%82%E9%94%81/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="fei">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="MyBatis-plus 自动填充和乐观锁">
                         
-                        <span class="card-title">fei</span>
+                        <span class="card-title">MyBatis-plus 自动填充和乐观锁</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            MyBatisplus的自动填充和乐观锁问题
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-03-30
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-30
+                            </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            Fly
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/MyBatisPlus/" class="post-category">
+                                    MyBatisPlus
+                                </a>
+                            
                             
                         </span>
                     </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/MyBatisPlus/">
+                        <span class="chip bg-color">MyBatisPlus</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%87%AA%E5%8A%A8%E5%A1%AB%E5%85%85/">
+                        <span class="chip bg-color">自动填充</span>
+                    </a>
+                    
+                    <a href="/tags/%E4%B9%90%E8%A7%82%E9%94%81/">
+                        <span class="chip bg-color">乐观锁</span>
+                    </a>
+                    
                 </div>
                 
             </div>
