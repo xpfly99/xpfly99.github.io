@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="MyBatis-plus 自动填充和乐观锁, Fly Blog">
-    <meta name="description" content="MyBatisplus的自动填充和乐观锁问题">
+    <meta name="description" content="MyBatisplus的自动填充和乐观锁分页等问题">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -375,6 +375,10 @@
                                 <span class="chip bg-color">乐观锁</span>
                             </a>
                         
+                            <a href="/tags/%E5%88%86%E9%A1%B5/">
+                                <span class="chip bg-color">分页</span>
+                            </a>
+                        
                     </div>
                     
                 </div>
@@ -403,21 +407,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-03-30
+                    2023-03-31
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    823
+                    1.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    5 分
                 </div>
                 
 
@@ -440,16 +444,16 @@
                 <h1 id="一、自动填充"><a href="#一、自动填充" class="headerlink" title="一、自动填充"></a>一、自动填充</h1><p>​	需求描述：</p>
 <p>​	项目中经常会遇到一些数据，每次都使用相同的方式填充，例如记录的创建时间，更新时间等。</p>
 <p>我们可以使用MyBatis Plus的自动填充功能，完成这些字段的赋值工作</p>
-<h2 id="1-数据修改"><a href="#1-数据修改" class="headerlink" title="1.数据修改"></a>1.数据修改</h2><p>​	在User表中添加datetime类型的新的字段 create_time、update_time</p>
+<h2 id="1、数据修改"><a href="#1、数据修改" class="headerlink" title="1、数据修改"></a>1、数据修改</h2><p>​	在User表中添加datetime类型的新的字段 create_time、update_time</p>
 <p><img src="/2023/03/30/MyBatisPlus-%E8%87%AA%E5%8A%A8%E5%A1%AB%E5%85%85%E4%B9%90%E8%A7%82%E9%94%81/image-20230330172116839.png"></p>
-<h2 id="2-实体类修改"><a href="#2-实体类修改" class="headerlink" title="2.实体类修改"></a>2.实体类修改</h2><p>​	实体上增加字段并添加自动填充注解</p>
+<h2 id="2、实体类修改"><a href="#2、实体类修改" class="headerlink" title="2、实体类修改"></a>2、实体类修改</h2><p>​	实体上增加字段并添加自动填充注解</p>
 <pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@TableField</span><span class="token punctuation">(</span>fill <span class="token operator">=</span> FieldFill<span class="token punctuation">.</span>INSERT<span class="token punctuation">)</span>	<span class="token comment" spellcheck="true">//添加的时候设置值</span>
 <span class="token keyword">private</span> Date createTime<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//create_time</span>
 
 <span class="token annotation punctuation">@TableField</span><span class="token punctuation">(</span>fill <span class="token operator">=</span> FieldFill<span class="token punctuation">.</span>INSERT_UPDATE<span class="token punctuation">)</span>	<span class="token comment" spellcheck="true">//修改的时候设置值，并且第一次添加时update—time也有值</span>
 <span class="token keyword">private</span> Date updateTime<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//update_time</span>
 </code></pre>
-<h2 id="3-实现元对象处理器接口"><a href="#3-实现元对象处理器接口" class="headerlink" title="3.实现元对象处理器接口"></a>3.实现元对象处理器接口</h2><p>​	注意：不要忘记添加 @Component 注解</p>
+<h2 id="3、实现元对象处理器接口"><a href="#3、实现元对象处理器接口" class="headerlink" title="3、实现元对象处理器接口"></a>3、实现元对象处理器接口</h2><p>​	注意：不要忘记添加 @Component 注解</p>
 <pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Component</span> <span class="token comment" spellcheck="true">//将类的对象创建交给spring管理</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MyMetaObjectHandler</span> <span class="token keyword">implements</span> <span class="token class-name">MetaObjectHandler</span> <span class="token punctuation">{</span>
 
@@ -492,13 +496,13 @@
 <p>​	2.更新时，带上这个version，执行更新时， set version &#x3D; newVersion where version &#x3D; oldVersion，如果version不对，就更新失败</p>
 <p>​	3.跟新成功后，数据库的version版本自动更新</p>
 <p>​	接下来介绍如何在Mybatis-Plus项目中，使用乐观锁：</p>
-<h2 id="1-修改数据表"><a href="#1-修改数据表" class="headerlink" title="1.修改数据表"></a>1.修改数据表</h2><p>​	在表中添加字段作为版本号</p>
+<h2 id="1、修改数据表"><a href="#1、修改数据表" class="headerlink" title="1、修改数据表"></a>1、修改数据表</h2><p>​	在表中添加字段作为版本号</p>
 <p><img src="/2023/03/30/MyBatisPlus-%E8%87%AA%E5%8A%A8%E5%A1%AB%E5%85%85%E4%B9%90%E8%A7%82%E9%94%81/image-20230330175430488.png"></p>
-<h2 id="2-修改实体类"><a href="#2-修改实体类" class="headerlink" title="2.修改实体类"></a>2.修改实体类</h2><p>​	在表对应实体类中添加版本号属性,并在版本号属性上添加@Version注解</p>
+<h2 id="2、修改实体类"><a href="#2、修改实体类" class="headerlink" title="2、修改实体类"></a>2、修改实体类</h2><p>​	在表对应实体类中添加版本号属性,并在版本号属性上添加@Version注解</p>
 <pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Version</span>
 <span class="token keyword">private</span> Integer version<span class="token punctuation">;</span>
 </code></pre>
-<h2 id="3-配置乐观锁插件"><a href="#3-配置乐观锁插件" class="headerlink" title="3.配置乐观锁插件"></a>3.配置乐观锁插件</h2><p>​	创建包config，创建文件MybatisPlusConfig.java</p>
+<h2 id="3、配置乐观锁插件"><a href="#3、配置乐观锁插件" class="headerlink" title="3、配置乐观锁插件"></a>3、配置乐观锁插件</h2><p>​	创建包config，创建文件MybatisPlusConfig.java</p>
 <p>​	此时可以删除主类中的 @MapperScan 扫描注解</p>
 <pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Configuration</span>
 <span class="token annotation punctuation">@MapperScan</span><span class="token punctuation">(</span><span class="token string">"com.atguigu.demomptest.mapper"</span><span class="token punctuation">)</span>
@@ -509,6 +513,28 @@
     <span class="token annotation punctuation">@Bean</span>
     <span class="token keyword">public</span> OptimisticLockerInterceptor <span class="token function">optimisticLockerInterceptor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">OptimisticLockerInterceptor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h1 id="三、MP的分页功能"><a href="#三、MP的分页功能" class="headerlink" title="三、MP的分页功能"></a>三、MP的分页功能</h1><p>​	MyBatis Plus自带分页插件，只要简单的配置即可实现分页功能</p>
+<h2 id="1、配置分页插件"><a href="#1、配置分页插件" class="headerlink" title="1、配置分页插件"></a>1、配置分页插件</h2><p>​	配置类中添加分页插件</p>
+<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Configuration</span>
+<span class="token annotation punctuation">@MapperScan</span><span class="token punctuation">(</span><span class="token string">"com.atguigu.demomptest.mapper"</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MpConfig</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">/**
+     * 乐观锁插件
+     */</span>
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token keyword">public</span> OptimisticLockerInterceptor <span class="token function">optimisticLockerInterceptor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">OptimisticLockerInterceptor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token comment" spellcheck="true">/**
+     * 分页插件
+     */</span>
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token keyword">public</span> PaginationInterceptor <span class="token function">paginationInterceptor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">PaginationInterceptor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
@@ -533,6 +559,46 @@
         <span class="token keyword">return</span> mybatisPlusInterceptor<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
     
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="2、编写分页代码"><a href="#2、编写分页代码" class="headerlink" title="2、编写分页代码"></a>2、编写分页代码</h2><h3 id="测试selectPage分页"><a href="#测试selectPage分页" class="headerlink" title="测试selectPage分页"></a><strong>测试selectPage分页</strong></h3><pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Autowired</span>
+<span class="token keyword">private</span> UserMapper userMapper<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//分页查询</span>
+<span class="token annotation punctuation">@Test</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">testSelectPage</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Page<span class="token operator">&lt;</span>User<span class="token operator">></span> page <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Page</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//当前页  每页记录数</span>
+    Page<span class="token operator">&lt;</span>User<span class="token operator">></span> userPage <span class="token operator">=</span> userMapper<span class="token punctuation">.</span><span class="token function">selectPage</span><span class="token punctuation">(</span>page<span class="token punctuation">,</span> null<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//后面为分页条件</span>
+    <span class="token comment" spellcheck="true">//返回对象得到分页所有数据</span>
+    <span class="token keyword">long</span> pages <span class="token operator">=</span> userPage<span class="token punctuation">.</span><span class="token function">getPages</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//总页数</span>
+    <span class="token keyword">long</span> current <span class="token operator">=</span> userPage<span class="token punctuation">.</span><span class="token function">getCurrent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//当前页</span>
+    List<span class="token operator">&lt;</span>User<span class="token operator">></span> records <span class="token operator">=</span> userPage<span class="token punctuation">.</span><span class="token function">getRecords</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//查询数据集合</span>
+    <span class="token keyword">long</span> total <span class="token operator">=</span> userPage<span class="token punctuation">.</span><span class="token function">getTotal</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//总记录数</span>
+    <span class="token keyword">boolean</span> hasNext <span class="token operator">=</span> userPage<span class="token punctuation">.</span><span class="token function">hasNext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//下一页</span>
+    <span class="token keyword">boolean</span> hasPrevious <span class="token operator">=</span> userPage<span class="token punctuation">.</span><span class="token function">hasPrevious</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//上一页</span>
+
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>pages<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>current<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>records<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>total<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>hasNext<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>hasPrevious<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="测试selectMapsPage分页"><a href="#测试selectMapsPage分页" class="headerlink" title="测试selectMapsPage分页"></a>测试selectMapsPage分页</h3><p>当指定了特定的查询列时，希望分页结果列表只返回被查询的列，而不是很多null值</p>
+<p>测试selectMapsPage分页：结果集是Map</p>
+<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Test</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">testSelectMapsPage</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token comment" spellcheck="true">//Page不需要泛型</span>
+Page<span class="token operator">&lt;</span>Map<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Object<span class="token operator">>></span> page <span class="token operator">=</span> newPage<span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+Page<span class="token operator">&lt;</span>Map<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Object<span class="token operator">>></span> pageParam <span class="token operator">=</span> userMapper<span class="token punctuation">.</span><span class="token function">selectMapsPage</span><span class="token punctuation">(</span>page<span class="token punctuation">,</span> null<span class="token punctuation">)</span><span class="token punctuation">;</span>
+List<span class="token operator">&lt;</span>Map<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Object<span class="token operator">>></span> records <span class="token operator">=</span> pageParam<span class="token punctuation">.</span><span class="token function">getRecords</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+records<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span>out<span class="token operator">:</span><span class="token operator">:</span>println<span class="token punctuation">)</span><span class="token punctuation">;</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>pageParam<span class="token punctuation">.</span><span class="token function">getCurrent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>pageParam<span class="token punctuation">.</span><span class="token function">getPages</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>pageParam<span class="token punctuation">.</span><span class="token function">getSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>pageParam<span class="token punctuation">.</span><span class="token function">getTotal</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>pageParam<span class="token punctuation">.</span><span class="token function">hasNext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>pageParam<span class="token punctuation">.</span><span class="token function">hasPrevious</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
 
@@ -609,6 +675,10 @@
                             
                                 <a href="/tags/%E4%B9%90%E8%A7%82%E9%94%81/">
                                     <span class="chip bg-color">乐观锁</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%88%86%E9%A1%B5/">
+                                    <span class="chip bg-color">分页</span>
                                 </a>
                             
                         </div>
@@ -704,7 +774,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            MyBatisplus的自动填充和乐观锁问题
+                            MyBatisplus的自动填充和乐观锁分页等问题
                         
                     </div>
                     <div class="publish-info">
@@ -737,6 +807,10 @@
                     
                     <a href="/tags/%E4%B9%90%E8%A7%82%E9%94%81/">
                         <span class="chip bg-color">乐观锁</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%88%86%E9%A1%B5/">
+                        <span class="chip bg-color">分页</span>
                     </a>
                     
                 </div>
@@ -784,12 +858,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E9%9D%A2%E8%AF%95/">
-                        <span class="chip bg-color">面试</span>
-                    </a>
-                    
                     <a href="/tags/Java%E5%9F%BA%E7%A1%80/">
                         <span class="chip bg-color">Java基础</span>
+                    </a>
+                    
+                    <a href="/tags/%E9%9D%A2%E8%AF%95/">
+                        <span class="chip bg-color">面试</span>
                     </a>
                     
                 </div>
