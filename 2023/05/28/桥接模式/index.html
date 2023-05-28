@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="设计模式之单例模式, Fly Blog">
-    <meta name="description" content="单例模式">
+    <meta name="keywords" content="设计模式之桥接模式, Fly Blog">
+    <meta name="description" content="桥接模式">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>设计模式之单例模式 | Fly Blog</title>
+    <title>设计模式之桥接模式 | Fly Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -334,12 +334,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">设计模式之单例模式</h1>
+                    <h1 class="description center-align post-title">设计模式之桥接模式</h1>
                 </div>
             </div>
         </div>
@@ -388,14 +388,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-05-23
+                    2023-05-28
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-05-23
+                    2023-05-28
                 </div>
                 
 
@@ -429,143 +429,148 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="单例模式的定义与特点"><a href="#单例模式的定义与特点" class="headerlink" title="单例模式的定义与特点"></a>单例模式的定义与特点</h3><p>**单例模式(<code>Singleton Pattern</code>)**：指一个类只有一个实例，且该类能自行创建这个实例的一种模式。例如，Windows 中只能打开一个任务管理器，这样可以避免因打开多个任务管理器窗口而造成内存资源的浪费，或出现各个窗口显示内容的不一致等错误。</p>
-<p>单例模式的要点有三个：</p>
-<ul>
-<li>一是某个类只能有一个实例；</li>
-<li>二是它必须自行创建这个实例；</li>
-<li>三是它必须自行向整个系统提供这个实例。</li>
-</ul>
-<h3 id="单例模式的结构与实现"><a href="#单例模式的结构与实现" class="headerlink" title="单例模式的结构与实现"></a>单例模式的结构与实现</h3><p>单例模式是<a target="_blank" rel="noopener" href="http://c.biancheng.net/design_pattern/">设计模式</a>中最简单的模式之一。通常，普通类的构造函数是公有的，外部类可以通过“new  构造函数()”来生成多个实例。但是，如果将类的构造函数设为私有的，外部类就无法调用该构造函数，也就无法生成多个实例。这时该类自身必须定义一个静态私有实例，并向外提供一个静态的公有函数用于创建或获取该静态私有实例。</p>
-<p><strong>1. 结构</strong></p>
-<p>单例模式的主要角色如下。</p>
-<ul>
-<li>单例类：包含一个实例且能自行创建这个实例的类。</li>
-<li>访问类：使用单例的类。</li>
-</ul>
-<p><strong>UML 类图</strong><img src="/2023/05/23/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/image-20230523100723884.png"></p>
-<p><strong>2.代码实现</strong></p>
-<p>第 1 种：饿汉式单例（推荐使用）</p>
-<p>该模式的特点是类一旦加载就创建一个单例，保证在调用 getInstance 方法之前单例已经存在了。</p>
-<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//饿汉式单例类.在类初始化时，已经自行实例化 </span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HungrySingleton</span>
-<span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">//全局唯一实例</span>
-    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> HungrySingleton instance<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">HungrySingleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    
-    <span class="token keyword">private</span> <span class="token function">HungrySingleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> HungrySingleton <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> instance<span class="token punctuation">;</span>
+                <h3 id><a href="#" class="headerlink" title></a></h3><h4 id="桥接（Bridge）模式："><a href="#桥接（Bridge）模式：" class="headerlink" title="桥接（Bridge）模式："></a>桥接（Bridge）模式：</h4><p> 将抽象与实现分离，使它们可以独立变化。它是用组合关系代替继承关系来实现，从而降低了抽象和实现这两个可变维度的耦合度。</p>
+<p>一般去景区游玩，买门票时针对儿童、老人、军人、医护人员或其他特定人群会有一定的优惠：比如儿童6折，老人5折</p>
+<p>假如有A、B两个景区，A景区门票原价100，B景区门票原价150。那么，这两个景区的儿童票和老人票如下</p>
+<table>
+<thead>
+<tr>
+<th align="center">A景区儿童票</th>
+<th align="center">A景区老人票</th>
+<th align="center">B景区儿童票</th>
+<th align="center">B景区老人票</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">100*0.6&#x3D;60</td>
+<td align="center">100*0.5&#x3D;50</td>
+<td align="center">150*0.6&#x3D;90</td>
+<td align="center">150*0.5&#x3D;75</td>
+</tr>
+</tbody></table>
+<p>假如后续有针对军人、医护人员的优惠该怎么扩展？你可能会说再增加对应的类不就行了</p>
+<p>确实可以，但是如果是又增加了C景区、D景区呢，这时候增加的就不只是一两个类了</p>
+<p><img src="/2023/05/28/%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/image-20230528143117956.png"></p>
+<p>需要增加的类是几何倍的增长，最终我们的类会变得非常多。而且每次新增时不只是一个类，而是N个类</p>
+<p>比如，新增景区时，有几种优惠人群就需要新增几个类。反之也一样，需要新增优惠人群时，有几个景区就需要新增几个类</p>
+<p>要解决这个问题，就需要使用到桥接模式</p>
+<p>我们可以把代码进行抽象，使景区和优惠政策相互独立不耦合<br><img src="/2023/05/28/%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/image-20230528143200139.png"></p>
+<p>如图右上角，新建一个 People 接口类，儿童类和老人类都实现这个接口，可以在 getSale() 方法中返回对应的折扣</p>
+<p>A 和 B 两个景区类，各自把 People类作为成员变量引入进来，此时 people就是一个桥梁。A 景区和 B 景区可以调用 people.getSale()来计算对应人群的门票价格</p>
+<p>这样改完以后，无论是新增景区还是新增优惠人群，都只需要新增一个类即可</p>
+<p>代码实现</p>
+<p>People接口类</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">People</span> <span class="token punctuation">{</span>
+    String <span class="token function">getSale</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>儿童类</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Children</span> <span class="token keyword">implements</span> <span class="token class-name">People</span> <span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> String <span class="token function">getSale</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token string">"0.6"</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//儿童票6折</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<blockquote>
-<p><strong>注</strong>：饿汉式在类创建的同时就已经创建好一个静态的对象供系统使用，以后不再改变，所以天生是线程安全的。如果不需要懒加载的方式，推荐使用。</p>
-</blockquote>
-<p>第 2 种：懒汉式单例（不推荐使用）</p>
-<p>该模式的特点是<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E7%B1%BB%E5%8A%A0%E8%BD%BD&spm=1001.2101.3001.7020">类加载</a>时没有生成单例，只有当第一次调用 getlnstance 方法时才去创建这个单例。</p>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">LazyMan</span> <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">//私有构造方法，为了不让外界创建该类的对象</span>
-    <span class="token keyword">private</span> <span class="token function">LazyMan</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
- 
-    <span class="token comment" spellcheck="true">//声明LazyMan类型的变量</span>
-    <span class="token keyword">private</span> <span class="token keyword">static</span> LazyMan instance<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//只是声明了该类的对象，没有赋初始值</span>
- 
-    <span class="token comment" spellcheck="true">//对外提供访问方式</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> LazyMan <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token comment" spellcheck="true">//判断instance是否为null,如果为null,说明还没有创建LazyMan类的对象</span>
-        <span class="token comment" spellcheck="true">//如果没有，创建一个并返回；如果有，直接返回</span>
-        <span class="token comment" spellcheck="true">//线程不安全，多线程下会创建多个对象</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>instance <span class="token operator">==</span> null<span class="token punctuation">)</span><span class="token punctuation">{</span>
-            instance <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">LazyMan</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-            <span class="token keyword">return</span> instance<span class="token punctuation">;</span>
+<p>老人类</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">OlderPeople</span> <span class="token keyword">implements</span> <span class="token class-name">People</span> <span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> String <span class="token function">getSale</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token string">"0.5"</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 老人票5折</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<blockquote>
-<p>注：是懒加载的方式，但是线程不安全，不推荐使用</p>
-</blockquote>
-<p>第 3 种：线程安全懒汉式但效率低（不推荐使用）</p>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">LazySingleton</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">volatile</span> LazySingleton instance<span class="token operator">=</span>null<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//保证 instance 在所有线程中同步</span>
-    <span class="token keyword">private</span> <span class="token function">LazySingleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>    <span class="token comment" spellcheck="true">//private 避免类在外部被实例化</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">synchronized</span> LazySingleton <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        <span class="token comment" spellcheck="true">//getInstance 方法前加同步</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span>instance<span class="token operator">==</span>null<span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            instance<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">LazySingleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> instance<span class="token punctuation">;</span>
+<p>门票接口类</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Tickets</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> <span class="token function">getMoney</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>A景区门票类</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ATickets</span> <span class="token keyword">implements</span> <span class="token class-name">Tickets</span><span class="token punctuation">{</span>
+
+    <span class="token keyword">private</span> People people<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token function">ATickets</span><span class="token punctuation">(</span>People people<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>people <span class="token operator">=</span> people<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">getMoney</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        String sale <span class="token operator">=</span> people<span class="token punctuation">.</span><span class="token function">getSale</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 获得折扣</span>
+        BigDecimal saleBigDecimal <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BigDecimal</span><span class="token punctuation">(</span>sale<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// java小数计算会丢失精度，要用BigDecimal来计算</span>
+        BigDecimal ticketsBigDecimal <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BigDecimal</span><span class="token punctuation">(</span><span class="token string">"100"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// a景区门票原价100</span>
+        <span class="token keyword">return</span> ticketsBigDecimal<span class="token punctuation">.</span><span class="token function">multiply</span><span class="token punctuation">(</span>saleBigDecimal<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">intValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 原价门票乘以折扣</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<blockquote>
-<p>注意：如果编写的是多线程程序，则不要删除上例代码中的关键字 volatile 和 synchronized，否则将存在线程非安全的问题。如果不删除这两个关键字就能保证线程安全，但是每次访问时都要同步，会影响性能，且消耗更多的资源，这是懒汉式单例的缺点。</p>
-</blockquote>
-<p>第 4 种：双重校验锁懒汉式（不推荐使用）</p>
-<p>双重检查锁模式解决了单例、性能、线程安全问题，看似完美无缺，其实存在问题，在多线程情况下，可能会出现空指针问题问题在于JVM在实例化对象时会进行优化和指令重排序操作。解决空指针问题只需使用volatile关键字，volatile可以保证可见性和有序性。</p>
-<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 双重校验锁线程安全懒汉式.</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Singleton</span> <span class="token punctuation">{</span> 
-    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">volatile</span> Singleton singleton<span class="token punctuation">;</span> 
-    <span class="token keyword">private</span> <span class="token function">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> 
-    <span class="token comment" spellcheck="true">// 通过'双重校验锁'来更高效的保证线程安全，也是懒加载的方式来获取实例</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> Singleton <span class="token function">getSingleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> 
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>singleton <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span> 
-            <span class="token keyword">synchronized</span> <span class="token punctuation">(</span>Singleton<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> 
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>singleton <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                    singleton <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
-                <span class="token punctuation">}</span> 
-            <span class="token punctuation">}</span> 
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> singleton<span class="token punctuation">;</span> 
+<p>B景区门票类</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">BTickets</span> <span class="token keyword">implements</span> <span class="token class-name">Tickets</span><span class="token punctuation">{</span>
+
+    <span class="token keyword">private</span> People people<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token function">BTickets</span><span class="token punctuation">(</span>People people<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>people <span class="token operator">=</span> people<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">getMoney</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        String sale <span class="token operator">=</span> people<span class="token punctuation">.</span><span class="token function">getSale</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 获得折扣</span>
+        BigDecimal saleBigDecimal <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BigDecimal</span><span class="token punctuation">(</span>sale<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// java小数计算会丢失精度，要用BigDecimal来计算</span>
+        BigDecimal ticketsBigDecimal <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BigDecimal</span><span class="token punctuation">(</span><span class="token string">"150"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// b景区门票原价100</span>
+        <span class="token keyword">return</span> ticketsBigDecimal<span class="token punctuation">.</span><span class="token function">multiply</span><span class="token punctuation">(</span>saleBigDecimal<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">intValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 原价门票乘以折扣</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>第 5 种：枚举单例式（强烈推荐）</p>
-<p>枚举方式属于饿汉式方式</p>
-<p>枚举类实现单例模式是极力推荐的单例实现模式，因为枚举是线程安全的，并且只会装载一次，枚举类是所有单例类实现中唯一不会被破坏的单例模式。</p>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">enum</span> LazyMan5 <span class="token punctuation">{</span>
-    INSTANCE<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<p>模拟调用</p>
+<pre class=" language-java"><code class="language-java">    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        People children <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Children</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        People olderPeople <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">OlderPeople</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Tickets aTickets <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ATickets</span><span class="token punctuation">(</span>children<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"A景区儿童票="</span> <span class="token operator">+</span> aTickets<span class="token punctuation">.</span><span class="token function">getMoney</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        aTickets <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ATickets</span><span class="token punctuation">(</span>olderPeople<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"A景区老人票="</span> <span class="token operator">+</span> aTickets<span class="token punctuation">.</span><span class="token function">getMoney</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Tickets bTikcets <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BTickets</span><span class="token punctuation">(</span>children<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"B景区儿童票="</span> <span class="token operator">+</span> bTikcets<span class="token punctuation">.</span><span class="token function">getMoney</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        bTikcets <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BTickets</span><span class="token punctuation">(</span>olderPeople<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"B景区老人票="</span> <span class="token operator">+</span> bTikcets<span class="token punctuation">.</span><span class="token function">getMoney</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 </code></pre>
-<p>第 6 种：静态内部类（推荐使用）</p>
-<p>静态内部类模式中实例由内部类创建，由于JVM在加载外部类的过程中，是不会加载静态内部类的，只有内部类的方法&#x2F;属性被调用时才会被加载，并初始化静态属性，静态属性由于被static修饰，保证只能被初始化一次，并且严格保证实例化顺序。</p>
-<p>静态内部类模式是一种优秀的单例模式。在没有任何锁的情况下，保证了多线程下的安全，并且没有任何性能影响和空间浪费。</p>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Singleton</span> <span class="token punctuation">{</span>  
-    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">LazyHolder</span> <span class="token punctuation">{</span>  
-       <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> Singleton INSTANCE <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
-    <span class="token punctuation">}</span>  
-    <span class="token keyword">private</span> <span class="token function">Singleton</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>  
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> Singleton <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>  
-       <span class="token keyword">return</span> LazyHolder<span class="token punctuation">.</span>INSTANCE<span class="token punctuation">;</span>  
-    <span class="token punctuation">}</span>  
-<span class="token punctuation">}</span>
-</code></pre>
-<h3 id="单例模式优缺点"><a href="#单例模式优缺点" class="headerlink" title="单例模式优缺点"></a>单例模式优缺点</h3><h4 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h4><ul>
-<li>提供了对唯一实例的受控访问。因为单例类封装了它的唯一实例，所以它可以严格控制客户怎样以及何时访问它，并为设计及开发团队提供了共享的概念。</li>
-<li>由于在系统内存中只存在一个对象，因此可以节约系统资源，对于一些需要频繁创建和销毁的对象，单例模式无疑可以提高系统的性能。</li>
-<li>允许可变数目的实例。我们可以基于单例模式进行扩展，使用与单例控制相似的方法来获得指定个数的对象实例</li>
+<h4 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h4><p>桥接模式是比较常用的设计模式之一，在创建型模式、结构型模式和行为型模式分类中，桥接模式归属于结构型模式</p>
+<p>桥接模式可以将一个大类或者一系列紧密相关的类拆分成 控制层 和 实现层 两个相互独立的层次结构，从而能在开发时分别使用</p>
+<p>在上文的具体案例中，<strong>Tickets</strong> 属于控制层，<strong>People</strong> 属于实现层</p>
+<p>控制层调用实现层的业务逻辑并与自身的业务逻辑进行组合，形成复杂的逻辑控制对外输出，客户端调用控制层来完成自己的业务</p>
+<h4 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h4><h5 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h5><ul>
+<li><p>桥接模式最大的优点在于将一个具有多重功能的系统进行解耦，拆分成相互独立的层次，从而提高系统的可扩展性</p>
+</li>
+<li><p>桥接模式符合开闭原则，不管新增控制层或实现层的代码都可以很容易实现，而且它们不会相互影响</p>
+</li>
+<li><p>也符合单一原则，控制层专注于控制层的逻辑处理，实现层专注于实现层的逻辑处理</p>
+</li>
+<li><p>业务系统在调用时只与控制层交互，不用关心实现层的具体逻辑</p>
+</li>
 </ul>
-<h4 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h4><ul>
-<li>由于单例模式中没有抽象层，因此单例类的扩展有很大的困难。</li>
-<li>单例类的职责过重，在一定程度上违背了“单一职责原则”。因为单例类既充当了工厂角色，提供了工厂方法，同时又充当了产品角色，包含一些业务方法，将产品的创建和产品的本身的功能融合到一起。</li>
-<li>滥用单例将带来一些负面问题，如为了节省资源将数据库连接池对象设计为单例类，可能会导致共享连接池对象的程序过多而出现连接池溢出；现在很多面向对象语言(如<code>Java</code>、<code>C#</code>)的运行环境都提供了自动垃圾回收的技术，因此，如果实例化的对象长时间不被利用，系统会认为它是垃圾，会自动销毁并回收资源，下次利用时又将重新实例化，这将导致对象状态的丢失。</li>
+<h5 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h5><ul>
+<li>桥接模式的主要缺点是增加了系统的设计与理解难度，由于聚合关联关系建立在抽象层，要求开发者针对抽象进行设计与编程。</li>
+<li>桥接模式要求正确识别出系统中两个独立变化的维度，因此其使用范围具有一定的局限性。</li>
 </ul>
-<h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><ul>
-<li>在应用场景中，某类只要求生成一个对象的时候，如一个班中的班长、每个人的身份证号等。</li>
-<li>当对象需要被共享的场合。由于单例模式只允许创建一个对象，共享该对象可以节省内存，并加快对象访问速度。如 Web 中的配置对象、数据库的连接池等。</li>
-<li>当某类需要频繁实例化，而创建的对象又频繁被销毁的时候，如多线程的线程池、网络连接池等</li>
+<h4 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h4><ul>
+<li><p>桥接模式的主要特点是将一个具有多重功能的系统拆分成两个相互独立的层次结构。所以，在识别到一个类具有两个相互独立变化的维度时，可以优先考虑使用该模式</p>
+</li>
+<li><p>桥接模式也常用于解决由于继承造成的代码侵入问题，在不希望或者不适用于继承的场景下也可以考虑使用该模式</p>
+</li>
+<li><p>如果想拆分一个复杂庞大的类时，也可以考虑使用该模式，前提是这个类可以拆分成多个相互独立的层次结构</p>
+</li>
+<li><p>如果一个系统需要在构件的抽象化角色和具体化角色之间增加更多的灵活性，避免在两个层次之间建立静态的继承联系，通过桥接模式可以使它们在抽象层建立一个关联关系。</p>
+</li>
 </ul>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
-<li>单例模式确保某一个类只有一个实例，而且自行实例化并向整个系统提供这个实例，这个类称为单例类，它提供全局访问的方法。单例模式的要点有三个：一是某个类只能有一个实例；二是它必须自行创建这个实例；三是它必须自行向整个系统提供这个实例。单例模式是一种对象创建型模式。</li>
-<li>单例模式只包含一个单例角色：在单例类的内部实现只生成一个实例，同时它提供一个静态的工厂方法，让客户可以使用它的唯一实例；为了防止在外部对其实例化，将其构造函数设计为私有。</li>
-<li>实现单例模式，如果不需要懒加载的效果，则推荐使用枚举和饿汉式的方式；如果需要懒加载的效果，则推荐使用静态内部类来实现更好。</li>
-<li>单例模式的主要优点在于提供了对唯一实例的受控访问并可以节约系统资源；其主要缺点在于因为缺少抽象层而难以扩展，且单例类职责过重。</li>
-<li>单例模式适用情况包括：系统只需要一个实例对象；客户调用类的单个实例只允许使用一个公共访问点。</li>
+<h4 id="模式扩展"><a href="#模式扩展" class="headerlink" title="模式扩展"></a>模式扩展</h4><p>适配器模式与桥接模式的联用:</p>
+<p>桥接模式和适配器模式用于设计的不同阶段，<strong>桥接模式用于系统的初步设计</strong>，对于存在两个独立变化维度的类可以将其分为抽象化和实现化两个角色，使它们可以分别进行变化；而在初步设计完成之后，<strong>当发现系统与已有类无法协同工作时，可以采用适配器模式</strong>。但有时候在设计初期也需要考虑适配器模式，特别是那些涉及到大量第三方应用接口的情况。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
+<li>桥接模式将抽象部分与它的实现部分分离，使它们都可以独立地变化。它是一种对象结构型模式。</li>
+<li>桥接模式包含如下四个角色：抽象类中定义了一个实现类接口类型的对象并可以维护该对象；扩充抽象类扩充由抽象类定义的接口，它实现了在抽象类中定义的抽象业务方法，在扩充抽象类中可以调用在实现类接口中定义的业务方法；实现类接口定义了实现类的接口，实现类接口仅提供基本操作，而抽象类定义的接口可能会做更多更复杂的操作；具体实现类实现了实现类接口并且具体实现它，在不同的具体实现类中提供基本操作的不同实现，在程序运行时，具体实现类对象将替换其父类对象，提供给客户端具体的业务操作方法。</li>
+<li>在桥接模式中，抽象化(<code>Abstraction</code>)与实现化(<code>Implementation</code>)脱耦，它们可以沿着各自的维度独立变化。</li>
+<li>桥接模式的主要优点是分离抽象接口及其实现部分，是比多继承方案更好的解决方法，桥接模式还提高了系统的可扩充性，在两个变化维度中任意扩展一个维度，都不需要修改原有系统，实现细节对客户透明，可以对用户隐藏实现细节；其主要缺点是增加系统的理解与设计难度，且识别出系统中两个独立变化的维度并不是一件容易的事情。</li>
+<li>桥接模式适用情况包括：需要在构件的抽象化角色和具体化角色之间增加更多的灵活性，避免在两个层次之间建立静态的继承联系；抽象化角色和实现化角色可以以继承的方式独立扩展而互不影响；一个类存在两个独立变化的维度，且这两个维度都需要进行扩展；设计要求需要独立管理抽象化角色和具体化角色；不希望使用继承或因为多层次继承导致系统类的个数急剧增加的系统。</li>
 </ul>
 
                 
@@ -593,7 +598,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://xpfly99.github.io/2023/05/23/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">http://xpfly99.github.io/2023/05/23/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</a>
+                    <a href="http://xpfly99.github.io/2023/05/28/%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/">http://xpfly99.github.io/2023/05/28/%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -711,9 +716,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2023/05/28/%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/">
                     <div class="card-image">
@@ -731,9 +737,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-05-28
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-05-28
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -746,6 +752,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -764,31 +771,31 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/03/31/MyBatisPlus%E4%B9%8B%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8/">
+                <a href="/2023/05/23/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="MyBatisPlus之代码生成器">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="设计模式之单例模式">
                         
-                        <span class="card-title">MyBatisPlus之代码生成器</span>
+                        <span class="card-title">设计模式之单例模式</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            代码自动生成器（新）
+                            单例模式
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-31
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-05-23
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/MyBatisPlus/" class="post-category">
-                                    MyBatisPlus
+                            <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="post-category">
+                                    设计模式
                                 </a>
                             
                             
@@ -798,12 +805,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/MyBatisPlus/">
-                        <span class="chip bg-color">MyBatisPlus</span>
-                    </a>
-                    
-                    <a href="/tags/%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90/">
-                        <span class="chip bg-color">代码生成</span>
+                    <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+                        <span class="chip bg-color">设计模式</span>
                     </a>
                     
                 </div>
