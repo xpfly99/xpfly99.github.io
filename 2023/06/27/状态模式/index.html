@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="设计模式之策略模式, Fly Blog">
-    <meta name="description" content="策略模式">
+    <meta name="keywords" content="设计模式之状态模式, Fly Blog">
+    <meta name="description" content="状态模式">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>设计模式之策略模式 | Fly Blog</title>
+    <title>设计模式之状态模式 | Fly Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -334,12 +334,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">设计模式之策略模式</h1>
+                    <h1 class="description center-align post-title">设计模式之状态模式</h1>
                 </div>
             </div>
         </div>
@@ -388,28 +388,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-06-26
+                    2023-06-27
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-06-26
+                    2023-06-27
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.6k
+                    1.7k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    9 分
+                    6 分
                 </div>
                 
 
@@ -430,157 +430,113 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h3 id="1、模式动机"><a href="#1、模式动机" class="headerlink" title="1、模式动机"></a>1、模式动机</h3><ul>
-<li>完成一项任务，往往可以有多种不同的方式，每一种方式称为一个策略，我们可以根据环境或者条件的不同选择不同的策略来完成该项任务。</li>
-<li>在软件开发中也常常遇到类似的情况，实现某一个功能有多个途径，此时可以使用一种设计模式来使得系统可以灵活地选择解决途径，也能够方便地增加新的解决途径。</li>
-<li>在软件系统中，有许多算法可以实现某一功能，如查找、排序等，一种常用的方法是硬编码(<code>Hard Coding</code>)在一个类中，如需要提供多种查找算法，可以将这些算法写到一个类中，在该类中提供多个方法，每一个方法对应一个具体的查找算法；当然也可以将这些查找算法封装在一个统一的方法中，通过<code>if…else…</code>等条件判断语句来进行选择。这两种实现方法我们都可以称之为硬编码，如果需要增加一种新的查找算法，需要修改封装算法类的源代码；更换查找算法，也需要修改客户端调用代码。在这个算法类中封装了大量查找算法，该类代码将较复杂，维护较为困难。</li>
-<li>除了提供专门的查找算法类之外，还可以在客户端程序中直接包含算法代码，这种做法更不可取，将导致客户端程序庞大而且难以维护，如果存在大量可供选择的算法时问题将变得更加严重。</li>
-<li>为了解决这些问题，可以定义一些独立的类来封装不同的算法，每一个类封装一个具体的算法，在这里，每一个封装算法的类我们都可以称之为策略(<code>Strategy</code>)，为了保证这些策略的一致性，一般会用一个抽象的策略类来做算法的定义，而具体每种算法则对应于一个具体策略类。</li>
+<li>在软件开发过程中，应用程序中的部分对象可能会根据不同的情况做出不同的行为，我们把这种对象称为有状态的对象，而把影响对象行为的一个或多个动态变化的属性称为状态。当有状态的对象与外部事件产生互动时，其内部状态就会发生改变，从而使其行为也发生改变。如人都有高兴和伤心的时候，不同的情绪有不同的行为，当然外界也会影响其情绪变化。</li>
+<li>对这种有状态的对象编程，传统的解决方案是：将这些所有可能发生的情况全都考虑到，然后使用 if-else 或 switch-case 语句来做状态判断，再进行不同情况的处理。但是显然这种做法对复杂的状态判断存在天然弊端，条件判断语句会过于臃肿，可读性差，且不具备扩展性，维护难度也大。且增加新的状态时要添加新的 if-else 语句，这违背了“开闭原则”，不利于程序的扩展。</li>
+<li>以上问题如果采用“<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F&spm=1001.2101.3001.7020">状态模式</a>”就能很好地得到解决。状态模式的解决思想是：当控制一个对象状态转换的条件表达式过于复杂时，把相关“判断逻辑”提取出来，用各个不同的类进行表示，系统处于哪种情况，直接使用相应的状态类对象进行处理，这样能把原来复杂的逻辑判断简单化，消除了 if-else、switch-case 等冗余语句，代码更有层次性，并且具备良好的扩展力。</li>
 </ul>
 <h3 id="2、模式定义"><a href="#2、模式定义" class="headerlink" title="2、模式定义"></a>2、模式定义</h3><blockquote>
-<p><strong>策略模式：策略模式是一种行为型模式，它将对象和行为分开，将行为定义为 <code>一个行为接口</code> 和 <code>具体行为的实现</code>。策略模式最大的特点是行为的变化，行为之间可以相互替换。每个if判断都可以理解为就是一个策略。本模式使得算法可独立于使用它的用户而变化</strong></p>
+<p>状态模式（State Pattern）也叫作状态机模式（StateMachine Pattern），允许对象在内部状态发生改变时改变它的行为，对象看起来好像修改了它的类，属于行为型设计模式。</p>
+<p>状态模式中类的行为是由状态决定的，在不同的状态下有不同的行为。其意图是让一个对象在其内部改变的时候，行为也随之改变。状态模式的核心是状态与行为绑定，不同的状态对应不同的行为</p>
 </blockquote>
-<h3 id="3、模式结构"><a href="#3、模式结构" class="headerlink" title="3、模式结构"></a>3、模式结构</h3><p>策略模式包含如下角色：</p>
-<ul>
-<li><code>Context</code>: 环境类</li>
-<li><code>Strategy</code>: 抽象策略类</li>
-<li><code>ConcreteStrategy</code>: 具体策略类</li>
-</ul>
-<h4 id="UML类图"><a href="#UML类图" class="headerlink" title="UML类图"></a>UML类图</h4><p><img src="/2023/06/26/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/image-20230626143109963.png"></p>
-<h3 id="4、代码示例"><a href="#4、代码示例" class="headerlink" title="4、代码示例"></a>4、代码示例</h3><blockquote>
-<p>前提：假设现在有一个卖书网站，若无其他情况下最终需要支付的钱为所有书籍的单价乘以数量，但若是现在网站开通会员模式，高级会员每本书20%的折扣，中级会员每本10%的折扣，初级会员没有折扣。</p>
-</blockquote>
-<h4 id="传统方式实现"><a href="#传统方式实现" class="headerlink" title="传统方式实现"></a><strong>传统方式实现</strong></h4><pre class=" language-java"><code class="language-java">    <span class="token keyword">public</span> Double <span class="token function">calculationPrice</span><span class="token punctuation">(</span>String type<span class="token punctuation">,</span> Double originalPrice<span class="token punctuation">,</span> <span class="token keyword">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">//会员类型、书籍种类、书籍数量</span>
+<h3 id="3、模式结构"><a href="#3、模式结构" class="headerlink" title="3、模式结构"></a>3、模式结构</h3><p>状态模式包含以下主要角色。</p>
+<ol>
+<li>环境类（Context）角色：也称为上下文，它定义了客户端需要的接口，内部维护一个当前状态，并负责具体状态的切换。</li>
+<li>抽象状态（State）角色：定义一个接口，用以封装环境对象中的特定状态所对应的行为，可以有一个或多个行为。</li>
+<li>具体状态（Concrete State）角色：实现抽象状态所对应的行为，并且在需要的情况下进行状态切换。</li>
+</ol>
+<h4 id="UML类图"><a href="#UML类图" class="headerlink" title="UML类图"></a>UML类图</h4><p><img src="/2023/06/27/%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/image-20230627160408058.png"></p>
+<h3 id="4、代码示例"><a href="#4、代码示例" class="headerlink" title="4、代码示例"></a>4、代码示例</h3><p><strong>抽象状态角色（State）</strong></p>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//抽象状态角色（State）</span>
+<span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">State</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> Context context<span class="token punctuation">;</span>
 
-        <span class="token comment" spellcheck="true">//中级会员计费</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>type<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span><span class="token string">"intermediateMember"</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">return</span> originalPrice <span class="token operator">*</span> n <span class="token operator">-</span> originalPrice <span class="token operator">*</span> <span class="token number">0.1</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token comment" spellcheck="true">//高级会员计费</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>type<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span><span class="token string">"advancePrimaryMember"</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">return</span> originalPrice <span class="token operator">*</span> n <span class="token operator">-</span> originalPrice <span class="token operator">*</span> <span class="token number">0.2</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token comment" spellcheck="true">//普通会员计费</span>
-        <span class="token keyword">return</span> originalPrice<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setContext</span><span class="token punctuation">(</span>Context context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>context <span class="token operator">=</span> context<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-</code></pre>
-<p>传统的实现方式，通过传统if代码判断。这样就会导致后期的维护性非常差。当后期需要新增计费方式，还需要在这里再加上if(),也不符合<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F&spm=1001.2101.3001.7020">设计模式</a>的开闭原则。</p>
-<h4 id="策略模式实现"><a href="#策略模式实现" class="headerlink" title="策略模式实现"></a><strong>策略模式实现</strong></h4><p><strong>抽象策略类</strong></p>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">MemberStrategy</span> <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">// 一个计算价格的抽象方法</span>
-    <span class="token comment" spellcheck="true">//price商品的价格 n商品的个数</span>
-    <span class="token keyword">public</span> <span class="token keyword">double</span> <span class="token function">calcPrice</span><span class="token punctuation">(</span><span class="token keyword">double</span> price<span class="token punctuation">,</span> <span class="token keyword">int</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">handle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p><strong>具体实现类</strong></p>
-<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 普通会员——不打折</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">PrimaryMemberStrategy</span> <span class="token keyword">implements</span> <span class="token class-name">MemberStrategy</span> <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// 实现策略</span>
-    <span class="token comment" spellcheck="true">//重写策略方法具体实现功能</span>
+<p><strong>环境类角色（Context）</strong></p>
+<pre class=" language-java"><code class="language-java">
+<span class="token comment" spellcheck="true">//环境类角色</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Context</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> State STATE_A <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ConcreteStateA</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> State STATE_B <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ConcreteStateB</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 默认状态</span>
+    <span class="token keyword">private</span> State currentState <span class="token operator">=</span> STATE_A<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setState</span><span class="token punctuation">(</span>IState state<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>currentState <span class="token operator">=</span> state<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>currentState<span class="token punctuation">.</span><span class="token function">setContext</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> State <span class="token function">getState</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>currentState<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">handle</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>currentState<span class="token punctuation">.</span><span class="token function">handle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><strong>具体状态角色（ConcreteStateA）</strong></p>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//具体状态角色（ConcreteStateA）</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ConcreteStateA</span> <span class="token keyword">extends</span> <span class="token class-name">State</span> <span class="token punctuation">{</span>
+
     <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token keyword">double</span> <span class="token function">calcPrice</span><span class="token punctuation">(</span><span class="token keyword">double</span> price<span class="token punctuation">,</span> <span class="token keyword">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> price <span class="token operator">*</span> n<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">handle</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"ConcreteStateA handle"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// A状态完成后自动切换到B状态</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>context<span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span>Context<span class="token punctuation">.</span>STATE_B<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>context<span class="token punctuation">.</span><span class="token function">getState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">handle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 中级会员 打百分之10的折扣</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">IntermediateMemberStrategy</span> <span class="token keyword">implements</span> <span class="token class-name">MemberStrategy</span><span class="token punctuation">{</span>
+<p><strong>具体状态角色（ConcreteStateB）</strong></p>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//具体状态角色（ConcreteStateB）</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ConcreteStateB</span> <span class="token keyword">extends</span> <span class="token class-name">State</span> <span class="token punctuation">{</span>
+
     <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token keyword">double</span> <span class="token function">calcPrice</span><span class="token punctuation">(</span><span class="token keyword">double</span> price<span class="token punctuation">,</span> <span class="token keyword">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">double</span> money <span class="token operator">=</span> <span class="token punctuation">(</span>price <span class="token operator">*</span> n<span class="token punctuation">)</span> <span class="token operator">-</span> price <span class="token operator">*</span> n <span class="token operator">*</span> <span class="token number">0.1</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> money<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">handle</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"ConcreteStateB handle"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 高级会员类 20%折扣</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">AdvanceMemberStrategy</span> <span class="token keyword">implements</span> <span class="token class-name">MemberStrategy</span><span class="token punctuation">{</span>
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token keyword">double</span> <span class="token function">calcPrice</span><span class="token punctuation">(</span><span class="token keyword">double</span> price<span class="token punctuation">,</span> <span class="token keyword">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">double</span> money <span class="token operator">=</span> price <span class="token operator">*</span> n <span class="token operator">-</span> price <span class="token operator">*</span> n <span class="token operator">*</span> <span class="token number">0.2</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> money<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<p><strong>上下文类</strong></p>
-<p>也叫做上下文类或环境类，起承上启下封装作用</p>
-<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">/**
- * 负责和具体的策略类交互
- * 这样的话，具体的算法和直接的客户端调用分离了，使得算法可以独立于客户端独立的变化。
- */</span>
-
-<span class="token comment" spellcheck="true">// 上下文类/环境类</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MemberContext</span> <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">// 用户折扣策略接口</span>
-    <span class="token keyword">private</span> MemberStrategy memberStrategy<span class="token punctuation">;</span>
-
-    <span class="token comment" spellcheck="true">// 注入构造方法</span>
-    <span class="token keyword">public</span> <span class="token function">MemberContext</span><span class="token punctuation">(</span>MemberStrategy memberStrategy<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>memberStrategy <span class="token operator">=</span> memberStrategy<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token comment" spellcheck="true">// 计算价格</span>
-    <span class="token keyword">public</span> <span class="token keyword">double</span> <span class="token function">qoutePrice</span><span class="token punctuation">(</span><span class="token keyword">double</span> goodsPrice<span class="token punctuation">,</span> <span class="token keyword">int</span> n<span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token comment" spellcheck="true">// 通过接口变量调用对应的具体策略</span>
-        <span class="token keyword">return</span> memberStrategy<span class="token punctuation">.</span><span class="token function">calcPrice</span><span class="token punctuation">(</span>goodsPrice<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
 <span class="token punctuation">}</span>
 </code></pre>
 <p><strong>测试类</strong></p>
-<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 测试类</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Application</span> <span class="token punctuation">{</span>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//测试类</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">{</span>
     <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-
-        <span class="token comment" spellcheck="true">// 具体行为策略</span>
-        MemberStrategy primaryMemberStrategy <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">PrimaryMemberStrategy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 接口回调（向上转型）</span>
-        MemberStrategy intermediateMemberStrategy <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">IntermediateMemberStrategy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        MemberStrategy advanceMemberStrategy <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">AdvanceMemberStrategy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-        <span class="token comment" spellcheck="true">// 用户选择不同策略</span>
-        MemberContext primaryContext <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MemberContext</span><span class="token punctuation">(</span>primaryMemberStrategy<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        MemberContext intermediateContext <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MemberContext</span><span class="token punctuation">(</span>intermediateMemberStrategy<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        MemberContext advanceContext <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MemberContext</span><span class="token punctuation">(</span>advanceMemberStrategy<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-        <span class="token comment" spellcheck="true">//计算一本300块钱的书</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"普通会员的价格："</span><span class="token operator">+</span> primaryContext<span class="token punctuation">.</span><span class="token function">qoutePrice</span><span class="token punctuation">(</span><span class="token number">300</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// 普通会员：300</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"中级会员的价格："</span><span class="token operator">+</span> intermediateContext<span class="token punctuation">.</span><span class="token function">qoutePrice</span><span class="token punctuation">(</span><span class="token number">300</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// 中级会员 270</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"高级会员的价格："</span><span class="token operator">+</span> advanceContext<span class="token punctuation">.</span><span class="token function">qoutePrice</span><span class="token punctuation">(</span><span class="token number">300</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// 高级会员240</span>
+        Context context <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Context</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        context<span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ConcreteStateA</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        context<span class="token punctuation">.</span><span class="token function">handle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p><img src="/2023/06/26/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/image-20230626150049661.png"></p>
-<h3 id="5、模式分析"><a href="#5、模式分析" class="headerlink" title="5、模式分析"></a>5、模式分析</h3><h4 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h4><ul>
-<li>一个系统需要动态地在几种算法中选择一种时，当有多个仅在行为上不同但是任务相关的类存在时，可将每个算法封装到策略类中。</li>
-<li>一个类定义了多种行为，并且这些行为在这个类的操作中以多个条件语句的形式出现，可将每个条件分支移入它们各自的策略类中以代替这些条件语句。</li>
-<li>系统中各算法彼此完全独立，且要求对客户隐藏具体算法的实现细节时。</li>
-<li>当一个算法使用的用户不应该知道的数据时 使用策略模式可以将算法实现细节隐藏起来 ，避免暴露与算法相关的复杂细节。注意 虽然可以将算法实现细节封装起来，但是客户程序必须知道各个策略子类的接口。</li>
+<p><strong>输出</strong></p>
+<pre class=" language-tex"><code class="language-tex">ConcreteStateA handle
+ConcreteStateB handle
+</code></pre>
+<h3 id="5、模式分析"><a href="#5、模式分析" class="headerlink" title="5、模式分析"></a>5、模式分析</h3><h4 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h4><ul>
+<li>当一个对象的行为取决于它的状态，并且它必须在运行时根据状态改变它的行为时，就可以考虑使用状态模式。</li>
+<li>一个操作中含有庞大的分支结构，并且这些分支决定于对象的状态时。</li>
 </ul>
 <h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ul>
-<li>策略模式提供了对“开闭原则”的完美支持，用户可以在不 修改原有系统的基础上选择算法或行为，也可以灵活地增加 新的算法或行为。</li>
-<li>策略模式提供了管理相关的算法族的办法。</li>
-<li>策略模式提供了可以替换继承关系的办法。</li>
-<li>使用策略模式可以避免使用多重条件转移语句。</li>
+<li>可以将不同的状态隔离；</li>
+<li>每个状态都是一个单独的类；</li>
+<li>可以将各种状态的转换逻辑，分布到状态的子类中，减少相互依赖；</li>
+<li>增加新状态，操作简单；</li>
 </ul>
 <h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ul>
-<li>客户端必须知道所有的策略类，并自行决定使用哪一个策略类。</li>
-<li>策略模式将造成产生很多策略类，可以通过使用享元模式在一 定程度上减少对象的数量。</li>
+<li>如果状态数量比较多，状态类的数量会增加，业务场景系统变得很复杂；</li>
+<li>如果业务中某个对象由几十上百个状态，就会很复杂，这时就需要对状态进行拆分处理。</li>
 </ul>
-<h3 id="6、模式扩展"><a href="#6、模式扩展" class="headerlink" title="6、模式扩展"></a>6、模式扩展</h3><p><strong>策略模式与状态模式：</strong></p>
-<ul>
-<li>可以通过环境类状态的个数来决定是使用策略模式还是状态模式。</li>
-<li>策略模式的环境类自己选择一个具体策略类，具体策略类无须关心环境类；而状态模式的环境类由于外在因素需要放进一个具体状态中，以便通过其方法实现状态的切换，因此环境类和状态类之间存在一种双向的关联关系。</li>
-<li>使用策略模式时，客户端需要知道所选的具体策略是哪一个，而使用状态模式时，客户端无须关心具体状态，环境类的状态会根据用户的操作自动转换。</li>
-<li>如果系统中某个类的对象存在多种状态，不同状态下行为有差异，而且这些状态之间可以发生转换时使用状态模式；如果系统中某个类的某一行为存在多种实现方式，而且这些实现方式可以互换时使用策略模式。</li>
-</ul>
-<h3 id="7、总结"><a href="#7、总结" class="headerlink" title="7、总结"></a>7、总结</h3><ul>
-<li><p>在策略模式中定义了一系列算法，将每一个算法封装起来，并让它们 可以相互替换。策略模式让算法独立于使用它的客户而变化，也称为 政策模式。策略模式是一种对象行为型模式。</p>
-</li>
-<li><p>策略模式包含三个角色：环境类在解决某个问题时可以采用多种策略， 在环境类中维护一个对抽象策略类的引用实例；抽象策略类为所支持 的算法声明了抽象方法，是所有策略类的父类；具体策略类实现了在 抽象策略类中定义的算法。</p>
-</li>
-<li><p>策略模式是对算法的封装，它把算法的责任和算法本身分割开，委派 给不同的对象管理。策略模式通常把一个系列的算法封装到一系列的 策略类里面，作为一个抽象策略类的子类。</p>
-</li>
-<li><p>策略模式主要优点在于对“开闭原则”的完美支持，在不修改原有系 统的基础上可以更换算法或者增加新的算法，它很好地管理算法族， 提高了代码的复用性，是一种替换继承，避免多重条件转移语句的 实现方式；其缺点在于客户端必须知道所有的策略类，并理解其区 别，同时在一定程度上增加了系统中类的个数，可能会存在很多策 略类。</p>
-</li>
-<li><p>策略模式适用情况包括：在一个系统里面有许多类，它们之间的区 别仅在于它们的行为，使用策略模式可以动态地让一个对象在许多 行为中选择一种行为；一个系统需要动态地在几种算法中选择一种； 避免使用难以维护的多重条件选择语句；希望在具体策略类中封装 算法和与相关的数据结构。</p>
-</li>
+<h3 id="6、总结"><a href="#6、总结" class="headerlink" title="6、总结"></a>6、总结</h3><ul>
+<li>状态模式允许一个对象在其内部状态改变时改变它的行为，对象看起来似乎修改了它的类。其别名为状态对象，状态模式是一种对象行为型模式。</li>
+<li>状态模式包含三个角色：环境类又称为上下文类，它是拥有状态的对象，在环境类中维护一个抽象状态类State的实例，这个实例定义当前状态，在具体实现时，它是一个State子类的对象，可以定义初始状态；抽象状态类用于定义一个接口以封装与环境类的一个特定状态相关的行为；具体状态类是抽象状态类的子类，每一个子类实现一个与环境类的一个状态相关的行为，每一个具体状态类对应环境的一个具体状态，不同的具体状态类其行为有所不同。</li>
+<li>状态模式描述了对象状态的变化以及对象如何在每一种状态下表现出不同的行为。</li>
+<li>状态模式的主要优点在于封装了转换规则，并枚举可能的状态，它将所有与某个状态有关的行为放到一个类中，并且可以方便地增加新的状态，只需要改变对象状态即可改变对象的行为，还可以让多个环境对象共享一个状态对象，从而减少系统中对象的个数；其缺点在于使用状态模式会增加系统类和对象的个数，且状态模式的结构与实现都较为复杂，如果使用不当将导致程序结构和代码的混乱，对于可以切换状态的状态模式不满足“开闭原则”的要求。</li>
+<li>状态模式适用情况包括：对象的行为依赖于它的状态（属性）并且可以根据它的状态改变而改变它的相关行为；代码中包含大量与对象状态有关的条件语句，这些条件语句的出现，会导致代码的可维护性和灵活性变差，不能方便地增加和删除状态，使客户类与类库之间的耦合增强。</li>
 </ul>
 
                 
@@ -608,7 +564,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://xpfly99.github.io/2023/06/26/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/">http://xpfly99.github.io/2023/06/26/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/</a>
+                    <a href="http://xpfly99.github.io/2023/06/27/%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/">http://xpfly99.github.io/2023/06/27/%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -726,9 +682,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2023/06/27/%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/">
                     <div class="card-image">
@@ -746,9 +703,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-06-27
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-27
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -761,6 +718,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -779,24 +737,24 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/05/31/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/">
+                <a href="/2023/06/26/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="设计模式之适配器模式">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="设计模式之策略模式">
                         
-                        <span class="card-title">设计模式之适配器模式</span>
+                        <span class="card-title">设计模式之策略模式</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            适配器模式
+                            策略模式
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-05-31
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-26
                             </span>
                         <span class="publish-author">
                             
